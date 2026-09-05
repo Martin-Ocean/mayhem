@@ -4,7 +4,7 @@
   "private": true,
   "description": "Desktop app that announces funny/insightful League of Legends match commentary to a Discord server (text + TTS voice) when a game ends.",
   "type": "commonjs",
-  "main": "dist/main/index.js",
+  "main": "dist/src/main/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
