@@ -4,12 +4,15 @@
   "private": true,
   "description": "Desktop app that announces funny/insightful League of Legends match commentary to a Discord server (text + TTS voice) when a game ends.",
   "type": "commonjs",
+  "main": "dist/main/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "mock-lcu": "ts-node scripts/mock-lcu-server.ts",
-    "replay": "ts-node scripts/replay-fixture.ts"
+    "replay": "ts-node scripts/replay-fixture.ts",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder"
   },
   "engines": {
     "node": ">=20"
@@ -25,9 +28,18 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.0",
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8",
     "express": "^4.19.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "vitest": "^1.6.0"
+  },
+  "build": {
+    "appId": "com.hexaram.app",
+    "productName": "Hex ARAM",
+    "files": ["dist/**/*", "src/renderer/**/*", "package.json"],
+    "directories": { "output": "release" },
+    "win": { "target": "nsis" }
   }
 }
