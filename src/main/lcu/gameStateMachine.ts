@@ -72,7 +72,11 @@ export class GameStateMachine extends EventEmitter {
         this.currentGameId = gameId;
       }
     } catch (err) {
-      this.emit("error", err);
+      // Guard against Node's EventEmitter throwing when 'error' has no listener (its one
+      // special-cased event name) -- see the identical guard in LcuClient.emitError().
+      if (this.listenerCount("error") > 0) {
+        this.emit("error", err);
+      }
     }
   }
 
