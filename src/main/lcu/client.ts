@@ -123,10 +123,22 @@ export class LcuClient extends EventEmitter {
       this.emit("connected");
       await this.pollOnce();
     } catch (err) {
-      this.emit("error", err);
+      this.emitError(err);
       if (!this.stopped) {
         setTimeout(() => this.attemptConnect(), RECONNECT_RETRY_MS);
       }
+    }
+  }
+
+  /**
+   * Node's EventEmitter throws if 'error' is emitted with no listener attached (the one
+   * event name with special-cased behavior) -- fine for a real app (main/index.ts always
+   * attaches one via StatusTracker), but transient poll/connect failures shouldn't be able
+   * to crash the process just because a caller (e.g. a test) didn't care to listen.
+   */
+  private emitError(err: unknown): void {
+    if (this.listenerCount("error") > 0) {
+      this.emit("error", err);
     }
   }
 
@@ -161,11 +173,11 @@ export class LcuClient extends EventEmitter {
         this.emit("disconnected");
         this.startPollingFallback();
       });
-      ws.on("error", (err) => this.emit("error", err));
+      ws.on("error", (err) => this.emitError(err));
 
       this.ws = ws;
     } catch (err) {
-      this.emit("error", err);
+      this.emitError(err);
       this.startPollingFallback();
     }
   }
@@ -173,7 +185,11 @@ export class LcuClient extends EventEmitter {
   private startPollingFallback(): void {
     if (this.pollTimer || this.stopped) return;
     this.pollTimer = setInterval(() => {
-      this.pollOnce().catch((err) => this.emit("error", err));
+      // clearInterval (in teardown()) only prevents future ticks -- a tick already in
+      // flight when stop() is called still needs this guard to avoid acting/emitting after
+      // the client (and whatever server it was talking to) has been torn down.
+      if (this.stopped) return;
+      this.pollOnce().catch((err) => this.emitError(err));
     }, this.options.pollIntervalMs ?? POLL_FALLBACK_INTERVAL_MS);
   }
 
@@ -184,9 +200,11 @@ export class LcuClient extends EventEmitter {
         "GET",
         "/lol-gameflow/v1/gameflow-phase"
       );
+      if (this.stopped) return;
       this.handlePhase(phase);
     } catch (err) {
-      this.emit("error", err);
+      if (this.stopped) return;
+      this.emitError(err);
     }
   }
 
