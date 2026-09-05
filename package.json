@@ -5,6 +5,10 @@
   "description": "Desktop app that announces funny/insightful League of Legends match commentary to a Discord server (text + TTS voice) when a game ends.",
   "type": "commonjs",
   "main": "dist/src/main/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Martin-Ocean/mayhem.git"
+  },
   "scripts": {
     "build:main": "tsc -p tsconfig.json",
     "build:renderer": "vite build",
@@ -15,7 +19,8 @@
     "mock-lcu": "ts-node scripts/mock-lcu-server.ts",
     "replay": "ts-node scripts/replay-fixture.ts",
     "start": "npm run build && electron .",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder",
+    "release": "npm run build && electron-builder --publish always"
   },
   "engines": {
     "node": ">=20"
@@ -68,6 +73,11 @@
     },
     "win": {
       "target": "nsis"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Martin-Ocean",
+      "repo": "mayhem"
     }
   }
 }
