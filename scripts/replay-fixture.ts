@@ -1,7 +1,7 @@
 /**
  * Dry-run CLI: drives a captured (or fixture) raw LCU match through the pipeline without a
- * live game. Currently covers normalize (highlights/commentary land in later phases and will
- * extend this same script rather than replacing it).
+ * live game. Currently covers normalize + highlight extraction (commentary generation lands
+ * in a later phase and will extend this same script rather than replacing it).
  *
  * Usage:
  *   npm run replay -- --game fixtures/sample-aram-mayhem-match.json --eog fixtures/sample-eog-stats.json
@@ -10,6 +10,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildMatchSummary } from "../src/main/match/normalize";
 import { flattenEogStats } from "../src/main/match/fetcher";
+import { runHighlightEngine } from "../src/main/highlights/engine";
 import type { RawLcuGame } from "../src/main/match/raw";
 import type { ChampionMap, FriendMap } from "../src/main/match/types";
 
@@ -61,4 +62,13 @@ if (summary.trackedParticipants.length > 0) {
   console.log(`\nTracked friends: ${summary.trackedParticipants.map((t) => t.discordName).join(", ")}`);
 }
 
-console.log("\n(highlights + commentary generation land in a later build phase)\n");
+const highlights = runHighlightEngine(summary);
+console.log(`\n--- Highlights (top ${highlights.length}) ---`);
+for (const h of highlights) {
+  const names = h.participants
+    .map((puuid) => summary.participants.find((p) => p.puuid === puuid)?.riotId ?? puuid)
+    .join(", ");
+  console.log(`  [${h.weight.toFixed(0)}] ${h.type}${names ? ` — ${names}` : ""} ${JSON.stringify(h.data)}`);
+}
+
+console.log("\n(commentary generation lands in a later build phase)\n");
