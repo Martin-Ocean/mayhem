@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hex ARAM</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0d0f14;
+    --panel: #161922;
+    --panel-2: #1d212c;
+    --border: #2a2f3d;
+    --text: #e8e9ee;
+    --muted: #9aa1b4;
+    --accent: #5865f2;
+    --win: #2ecc71;
+    --loss: #e74c3c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero { padding: 88px 0 56px; text-align: center; }
+  .kicker {
+    display: inline-block; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: rgba(88,101,242,0.12); border: 1px solid rgba(88,101,242,0.35);
+    border-radius: 999px; padding: 4px 12px; margin-bottom: 18px;
+  }
+  h1 { font-size: 44px; margin: 0 0 14px; letter-spacing: -0.02em; }
+  .tagline { font-size: 19px; color: var(--muted); max-width: 560px; margin: 0 auto 32px; }
+
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px;
+    font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-secondary { background: var(--panel-2); color: var(--text); border-color: var(--border); }
+  .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+  section { padding: 48px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 24px; margin: 0 0 24px; }
+
+  /* Mock Discord embed -- built with real sample output from the app's template
+     commentary generator (fixtures/sample-aram-mayhem-match.json), not a fabricated screenshot. */
+  .discord-mock {
+    background: #313338; border-radius: 8px; padding: 16px 18px; max-width: 520px;
+    margin: 0 auto; font-family: "gg sans", -apple-system, "Segoe UI", sans-serif; color: #dbdee1;
+  }
+  .discord-mock .bot-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .discord-mock .avatar {
+    width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#5865f2,#8b5cf6);
+    flex-shrink: 0;
+  }
+  .discord-mock .bot-name { font-weight: 600; color: #fff; font-size: 14px; }
+  .discord-mock .bot-tag {
+    background: var(--accent); color: white; font-size: 10px; padding: 1px 4px; border-radius: 3px; margin-left: 4px;
+  }
+  .discord-mock .embed {
+    border-left: 4px solid var(--win); background: #2b2d31; border-radius: 4px; padding: 12px 14px; font-size: 13.5px;
+  }
+  .discord-mock .embed-title { font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 14px; }
+  .discord-mock .embed-line { margin: 4px 0; color: #dbdee1; }
+  .discord-mock .embed-footer { margin-top: 10px; font-size: 11px; color: #949ba4; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .feature { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .feature .icon { font-size: 22px; margin-bottom: 10px; }
+  .feature h3 { font-size: 16px; margin: 0 0 8px; }
+  .feature p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+  .steps li {
+    counter-increment: step; position: relative; padding: 14px 0 14px 44px; border-bottom: 1px solid var(--border);
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 12px; width: 28px; height: 28px;
+    border-radius: 50%; background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+  }
+  .steps strong { color: var(--text); }
+  .steps span { color: var(--muted); }
+
+  code {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; font-size: 13px;
+  }
+
+  footer { padding: 32px 0 60px; text-align: center; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">For League of Legends + Discord</span>
+    <h1>Your group's game recap<br />shouldn't be boring.</h1>
+    <p class="tagline">
+      Hex ARAM watches your League client, and the moment a match ends it posts a funny,
+      specific recap to your Discord server — and reads it out loud in your voice channel.
+    </p>
+    <div class="cta-row">
+      <!-- TODO: point this at the latest GitHub Release asset once the repo has a remote and a tagged release. -->
+      <a class="btn btn-primary" href="#" aria-disabled="true">⬇ Download for Windows</a>
+      <a class="btn btn-secondary" href="#setup">See setup steps</a>
+    </div>
+    <p class="note">Releases aren't published yet — this button is a placeholder until the first tagged build ships.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>What it sounds like</h2>
+    <div class="discord-mock">
+      <div class="bot-row">
+        <div class="avatar"></div>
+        <div><span class="bot-name">Hex ARAM</span><span class="bot-tag">BOT</span></div>
+      </div>
+      <div class="embed">
+        <div class="embed-title">🔥 Multikill Alert</div>
+        <div class="embed-line">🔥 Alice went full main-character energy with a penta-kill on Sett.</div>
+        <div class="embed-line">🚨 Ivan decided Morgana wasn't worth their time and dipped mid-game.</div>
+        <div class="embed-line">🏆 Alice carried so hard on Sett the rest of the team basically got a participation trophy.</div>
+        <div class="embed-line">💀 Grace went 1/10/2 on Gragas — please just afk farm next time.</div>
+        <div class="embed-footer">ARAM Mayhem • 19m 40s</div>
+      </div>
+    </div>
+    <p class="note" style="text-align:center; max-width:520px; margin:16px auto 0;">
+      Real output from the app's template commentary generator against a sample match — not a mockup.
+      The same text gets spoken aloud via TTS in your voice channel.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Why it's different</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="icon">🕹️</div>
+        <h3>Works with ARAM Mayhem</h3>
+        <p>Reads match data straight from your League client instead of Riot's public API — which Riot deliberately blocks for ARAM Mayhem. Works for every mode.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3>Actually finds the story</h3>
+        <p>Pentakills, ints, AFK teammates, stomps, nail-biters, unsung support healing — rule-based detectors surface what's actually worth talking about.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔊</div>
+        <h3>Text and voice</h3>
+        <p>Posts a Discord embed and joins your voice channel to read the recap out loud, right after the game ends.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔒</div>
+        <h3>Runs on your machine</h3>
+        <p>No account, no server, no third party seeing your data. Your Discord bot token and API keys stay encrypted on your own PC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="wrap">
+    <h2>Setup</h2>
+    <ol class="steps">
+      <li><strong>Create a Discord bot</strong> — go to the <span>Discord Developer Portal</span>, create an application, add a bot, and copy its token.</li>
+      <li><strong>Invite it to your server</strong> — under OAuth2 → URL Generator, check <code>bot</code> with <code>Send Messages</code> and <code>Connect</code>/<code>Speak</code> permissions, then open the generated link.</li>
+      <li><strong>Install and open Hex ARAM</strong> — paste your bot token into the Discord Setup tab and hit Test Connection.</li>
+      <li><strong>Pick your channels</strong> — choose the text channel for recaps and (optionally) a voice channel, or leave it on auto-detect.</li>
+      <li><strong>Map your friends</strong> — add each friend's League PUUID and Discord name so recaps call people out by name.</li>
+      <li><strong>Play ARAM</strong> — leave the app running in the background. When your game ends, the recap posts automatically.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Hex ARAM is a personal project, not affiliated with Riot Games or Discord Inc.
+  </div>
+</footer>
+
+</body>
+</html>
