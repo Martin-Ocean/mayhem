@@ -15,7 +15,12 @@
     "node": ">=20"
   },
   "dependencies": {
-    "league-connect": "^5.5.0"
+    "@discordjs/voice": "^0.19.0",
+    "discord.js": "^14.15.3",
+    "ffmpeg-static": "^5.2.0",
+    "league-connect": "^5.5.0",
+    "libsodium-wrappers": "^0.7.15",
+    "opusscript": "^0.1.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
