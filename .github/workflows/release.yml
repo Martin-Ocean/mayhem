@@ -1,0 +1,35 @@
+name: Release
+
+# Cutting a release: bump "version" in package.json, commit it on main, then push a matching
+# tag (e.g. `git tag v0.2.0 && git push origin v0.2.0`) -- or just run this manually via the
+# Actions tab (workflow_dispatch) to build/publish off whatever's currently on the branch.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+# electron-builder's GitHub publish provider needs write access to create the release and
+# upload assets; the default GITHUB_TOKEN is otherwise read-only.
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Package and publish to GitHub Releases
+        run: npx electron-builder --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
