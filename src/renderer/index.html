@@ -1,113 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Hex ARAM</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, sans-serif; margin: 0; padding: 0; background: #111; color: #eee; }
-    header { padding: 12px 20px; background: #1b1b1b; border-bottom: 1px solid #333; }
-    header h1 { font-size: 18px; margin: 0; }
-    nav { display: flex; gap: 4px; padding: 8px 20px; background: #161616; border-bottom: 1px solid #333; }
-    nav button { background: none; border: none; color: #aaa; padding: 8px 14px; cursor: pointer; border-radius: 6px 6px 0 0; }
-    nav button.active { background: #222; color: #fff; }
-    main { padding: 20px; max-width: 720px; }
-    section { display: none; }
-    section.active { display: block; }
-    label { display: block; margin: 12px 0 4px; font-size: 13px; color: #aaa; }
-    input[type=text], input[type=password], select, textarea { width: 100%; box-sizing: border-box; padding: 8px; background: #1e1e1e; border: 1px solid #333; color: #eee; border-radius: 4px; }
-    button.action { margin-top: 12px; padding: 8px 16px; background: #4c6ef5; border: none; color: #fff; border-radius: 4px; cursor: pointer; }
-    button.action:disabled { opacity: 0.5; cursor: default; }
-    .row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
-    .row input { flex: 1; }
-    .row button { background: #333; border: none; color: #eee; border-radius: 4px; padding: 6px 10px; cursor: pointer; }
-    .toggle-row { display: flex; align-items: center; gap: 8px; margin: 10px 0; }
-    #result, #log { white-space: pre-wrap; background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 4px; font-size: 13px; margin-top: 12px; }
-    .status-grid { display: grid; grid-template-columns: 160px 1fr; gap: 6px 12px; font-size: 13px; }
-    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-    .dot.on { background: #2ecc71; }
-    .dot.off { background: #e74c3c; }
-  </style>
-</head>
-<body>
-  <header><h1>Hex ARAM</h1></header>
-  <nav>
-    <button data-tab="discord" class="active">Discord Setup</button>
-    <button data-tab="channels">Channels</button>
-    <button data-tab="friends">Friends</button>
-    <button data-tab="features">Features</button>
-    <button data-tab="test">Test Announcement</button>
-    <button data-tab="status">Status</button>
-  </nav>
-  <main>
-    <section id="discord" class="active">
-      <label for="botToken">Discord Bot Token</label>
-      <input type="password" id="botToken" placeholder="Paste your bot token" />
-      <button class="action" id="saveTokenBtn">Save Token</button>
-      <button class="action" id="testConnBtn">Test Connection</button>
-      <div id="discordResult"></div>
-    </section>
-
-    <section id="channels">
-      <label for="guildSelect">Server</label>
-      <select id="guildSelect"></select>
-      <label for="textChannelSelect">Text Channel (announcements)</label>
-      <select id="textChannelSelect"></select>
-      <label for="voiceChannelSelect">Voice Channel (optional -- auto-detect if unset)</label>
-      <select id="voiceChannelSelect"><option value="">(auto-detect)</option></select>
-      <button class="action" id="saveChannelsBtn">Save Channels</button>
-    </section>
-
-    <section id="friends">
-      <p>Map each friend's League PUUID to their Discord display name.</p>
-      <div id="friendRows"></div>
-      <button id="addFriendRowBtn">+ Add Friend</button>
-      <br />
-      <button class="action" id="saveFriendsBtn">Save Friends</button>
-    </section>
-
-    <section id="features">
-      <div class="toggle-row"><input type="checkbox" id="textEnabled" /> <label style="margin:0" for="textEnabled">Text announcements</label></div>
-      <div class="toggle-row"><input type="checkbox" id="voiceEnabled" /> <label style="margin:0" for="voiceEnabled">Voice announcements (TTS)</label></div>
-
-      <label for="personaSelect">Persona</label>
-      <select id="personaSelect">
-        <option value="roast">Roast</option>
-        <option value="hypeCaster">Hype Caster</option>
-        <option value="deadpan">Deadpan</option>
-      </select>
-
-      <label for="commentarySourceSelect">Commentary Source</label>
-      <select id="commentarySourceSelect">
-        <option value="template">Template (default)</option>
-        <option value="ai">AI (not yet implemented)</option>
-      </select>
-
-      <label for="ttsProviderSelect">TTS Provider</label>
-      <select id="ttsProviderSelect">
-        <option value="">(none)</option>
-        <option value="elevenlabs">ElevenLabs</option>
-        <option value="google">Google Cloud TTS</option>
-      </select>
-      <label for="ttsApiKey">TTS API Key</label>
-      <input type="password" id="ttsApiKey" placeholder="Paste your TTS provider API key" />
-
-      <label for="anthropicApiKey">Anthropic API Key (for AI commentary, once implemented)</label>
-      <input type="password" id="anthropicApiKey" placeholder="sk-..." />
-
-      <button class="action" id="saveFeaturesBtn">Save Features</button>
-    </section>
-
-    <section id="test">
-      <p>Runs the full pipeline against a bundled sample match -- no live game required.</p>
-      <button class="action" id="runTestBtn">Run Test Announcement</button>
-      <div id="result"></div>
-    </section>
-
-    <section id="status">
-      <div class="status-grid" id="statusGrid"></div>
-    </section>
-  </main>
-  <script src="renderer.js"></script>
-</body>
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hex ARAM</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

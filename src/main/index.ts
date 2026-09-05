@@ -43,7 +43,7 @@ async function createWindow(): Promise<void> {
       nodeIntegration: false,
     },
   });
-  await mainWindow.loadFile(join(resourcesDir, "src", "renderer", "index.html"));
+  await mainWindow.loadFile(join(resourcesDir, "dist", "renderer", "index.html"));
 }
 
 function createTray(): void {
