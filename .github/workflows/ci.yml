@@ -1,0 +1,37 @@
+name: CI
+
+# Runs on direct pushes to the protected branches and on any PR targeting them (covers
+# feature/**, fix/**, release/** work once they open a PR) -- avoids double-running the same
+# commit for branches that push straight to an open PR.
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+jobs:
+  test:
+    # windows-latest, not ubuntu -- this is a Windows-only Electron app (NSIS packaging, LCU
+    # discovery shells out to PowerShell), so CI should match the real target environment.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type-check (main/preload)
+        run: npx tsc --noEmit -p tsconfig.json
+
+      - name: Type-check (renderer)
+        run: npx tsc --noEmit -p src/renderer/tsconfig.json
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build (main/preload + renderer)
+        run: npm run build
