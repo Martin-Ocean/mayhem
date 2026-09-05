@@ -1,18 +1,19 @@
 /**
- * Dry-run CLI: drives a captured (or fixture) raw LCU match through the pipeline without a
- * live game. Currently covers normalize + highlight extraction (commentary generation lands
- * in a later phase and will extend this same script rather than replacing it).
+ * Dry-run CLI: drives a captured (or fixture) raw LCU match through the full pipeline
+ * (normalize -> highlights -> commentary) without a live game.
  *
  * Usage:
- *   npm run replay -- --game fixtures/sample-aram-mayhem-match.json --eog fixtures/sample-eog-stats.json
+ *   npm run replay -- --game fixtures/sample-aram-mayhem-match.json --eog fixtures/sample-eog-stats.json --persona roast
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildMatchSummary } from "../src/main/match/normalize";
 import { flattenEogStats } from "../src/main/match/fetcher";
 import { runHighlightEngine } from "../src/main/highlights/engine";
+import { TemplateCommentaryGenerator } from "../src/main/llm/templateGenerator";
 import type { RawLcuGame } from "../src/main/match/raw";
 import type { ChampionMap, FriendMap } from "../src/main/match/types";
+import type { Persona } from "../src/main/llm/types";
 
 function arg(name: string, fallback: string): string {
   const idx = process.argv.indexOf(`--${name}`);
@@ -28,6 +29,7 @@ const gamePath = arg("game", join(fixturesDir, "sample-aram-mayhem-match.json"))
 const eogPath = arg("eog", join(fixturesDir, "sample-eog-stats.json"));
 const championsPath = arg("champions", join(fixturesDir, "champion-map.json"));
 const friendsPath = arg("friends", "");
+const persona = arg("persona", "roast") as Persona;
 
 const rawGame = loadJson<RawLcuGame>(gamePath);
 const rawEog = loadJson<Record<string, unknown>>(eogPath);
@@ -71,4 +73,14 @@ for (const h of highlights) {
   console.log(`  [${h.weight.toFixed(0)}] ${h.type}${names ? ` — ${names}` : ""} ${JSON.stringify(h.data)}`);
 }
 
-console.log("\n(commentary generation lands in a later build phase)\n");
+async function main() {
+  const generator = new TemplateCommentaryGenerator();
+  const result = await generator.generate({ summary, highlights, friendNames: friendMap, persona });
+
+  console.log(`\n--- Commentary (persona: ${persona}) ---`);
+  console.log(`Title: ${result.title}`);
+  console.log(`\nEmbed body:\n${result.embedBody}`);
+  console.log(`\nSpoken text:\n${result.spokenText}\n`);
+}
+
+main();
