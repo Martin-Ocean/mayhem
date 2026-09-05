@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.log
+.env
+.env.local
+
+# Electron packaging output (added in a later phase)
+release/
+out/
+
+# local runtime config with secrets (added in a later phase)
+*.userdata/
+secrets.json

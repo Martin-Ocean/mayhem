@@ -1,0 +1,107 @@
+{
+  "gameId": 5301234567,
+  "platformId": "NA1",
+  "queueId": 2400,
+  "gameMode": "ARAM",
+  "gameDuration": 1180,
+  "gameCreation": 1735689600000,
+  "gameVersion": "14.20.1",
+  "participantIdentities": [
+    { "participantId": 1, "player": { "puuid": "puuid-alice", "gameName": "Alice", "tagLine": "NA1" } },
+    { "participantId": 2, "player": { "puuid": "puuid-bob", "gameName": "Bob", "tagLine": "NA1" } },
+    { "participantId": 3, "player": { "puuid": "puuid-carol", "gameName": "Carol", "tagLine": "NA1" } },
+    { "participantId": 4, "player": { "puuid": "puuid-dave", "gameName": "Dave", "tagLine": "NA1" } },
+    { "participantId": 5, "player": { "puuid": "puuid-erin", "gameName": "Erin", "tagLine": "NA1" } },
+    { "participantId": 6, "player": { "puuid": "puuid-frank", "gameName": "Frank", "tagLine": "NA1" } },
+    { "participantId": 7, "player": { "puuid": "puuid-grace", "gameName": "Grace", "tagLine": "NA1" } },
+    { "participantId": 8, "player": { "puuid": "puuid-heidi", "gameName": "Heidi", "tagLine": "NA1" } },
+    { "participantId": 9, "player": { "puuid": "puuid-ivan", "gameName": "Ivan", "tagLine": "NA1" } },
+    { "participantId": 10, "player": { "puuid": "puuid-judy", "gameName": "Judy", "tagLine": "NA1" } }
+  ],
+  "teams": [
+    { "teamId": 100, "win": "Win", "towerKills": 5, "dragonKills": 0, "baronKills": 0, "riftHeraldKills": 0, "inhibitorKills": 1 },
+    { "teamId": 200, "win": "Fail", "towerKills": 1, "dragonKills": 0, "baronKills": 0, "riftHeraldKills": 0, "inhibitorKills": 0 }
+  ],
+  "participants": [
+    {
+      "participantId": 1, "championId": 875, "teamId": 100, "spell1Id": 4, "spell2Id": 32,
+      "stats": { "win": true, "kills": 18, "deaths": 3, "assists": 9, "item0": 3153, "item1": 3142, "item2": 3814, "item3": 6673, "item4": 0, "item5": 0, "item6": 3363,
+        "goldEarned": 14200, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 32000, "totalDamageTaken": 21000,
+        "totalHeal": 1200, "visionScore": 8, "doubleKills": 2, "tripleKills": 1, "quadraKills": 0, "pentaKills": 1, "largestMultiKill": 5,
+        "firstBloodKill": true, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": true,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 2, "championId": 412, "teamId": 100, "spell1Id": 4, "spell2Id": 14,
+      "stats": { "win": true, "kills": 3, "deaths": 5, "assists": 20, "item0": 3190, "item1": 3107, "item2": 3222, "item3": 3067, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 9800, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 9000, "totalDamageTaken": 18000,
+        "totalHeal": 2000, "visionScore": 22, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 1,
+        "firstBloodKill": false, "firstBloodAssist": true, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 3, "championId": 89, "teamId": 100, "spell1Id": 4, "spell2Id": 12,
+      "stats": { "win": true, "kills": 6, "deaths": 4, "assists": 15, "item0": 3068, "item1": 3075, "item2": 3143, "item3": 3110, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 11200, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 15000, "totalDamageTaken": 34000,
+        "totalHeal": 800, "visionScore": 10, "doubleKills": 1, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 2,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": true, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 4, "championId": 202, "teamId": 100, "spell1Id": 4, "spell2Id": 7,
+      "stats": { "win": true, "kills": 9, "deaths": 6, "assists": 10, "item0": 3031, "item1": 3072, "item2": 3036, "item3": 3094, "item4": 0, "item5": 0, "item6": 3363,
+        "goldEarned": 12500, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 27000, "totalDamageTaken": 15000,
+        "totalHeal": 400, "visionScore": 6, "doubleKills": 1, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 2,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 5, "championId": 43, "teamId": 100, "spell1Id": 3, "spell2Id": 4,
+      "stats": { "win": true, "kills": 2, "deaths": 4, "assists": 18, "item0": 3050, "item1": 3158, "item2": 3222, "item3": 3117, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 8600, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 6000, "totalDamageTaken": 12000,
+        "totalHeal": 500, "visionScore": 18, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 0,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 6, "championId": 51, "teamId": 200, "spell1Id": 4, "spell2Id": 7,
+      "stats": { "win": false, "kills": 4, "deaths": 8, "assists": 6, "item0": 3094, "item1": 3006, "item2": 3153, "item3": 0, "item4": 0, "item5": 0, "item6": 3363,
+        "goldEarned": 8900, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 14000, "totalDamageTaken": 16000,
+        "totalHeal": 200, "visionScore": 5, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 1,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 7, "championId": 79, "teamId": 200, "spell1Id": 4, "spell2Id": 12,
+      "stats": { "win": false, "kills": 1, "deaths": 10, "assists": 2, "item0": 3068, "item1": 0, "item2": 0, "item3": 0, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 6200, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 8000, "totalDamageTaken": 22000,
+        "totalHeal": 100, "visionScore": 4, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 0,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 8, "championId": 555, "teamId": 200, "spell1Id": 4, "spell2Id": 14,
+      "stats": { "win": false, "kills": 5, "deaths": 6, "assists": 3, "item0": 3142, "item1": 3814, "item2": 0, "item3": 0, "item4": 0, "item5": 0, "item6": 3363,
+        "goldEarned": 9100, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 19000, "totalDamageTaken": 14000,
+        "totalHeal": 300, "visionScore": 6, "doubleKills": 1, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 2,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 9, "championId": 25, "teamId": 200, "spell1Id": 4, "spell2Id": 3,
+      "stats": { "win": false, "kills": 0, "deaths": 2, "assists": 4, "item0": 0, "item1": 0, "item2": 0, "item3": 0, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 3400, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 2000, "totalDamageTaken": 3000,
+        "totalHeal": 100, "visionScore": 2, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 0,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    },
+    {
+      "participantId": 10, "championId": 267, "teamId": 200, "spell1Id": 4, "spell2Id": 7,
+      "stats": { "win": false, "kills": 2, "deaths": 7, "assists": 5, "item0": 3068, "item1": 3110, "item2": 0, "item3": 0, "item4": 0, "item5": 0, "item6": 3364,
+        "goldEarned": 8000, "totalMinionsKilled": 0, "neutralMinionsKilled": 0, "totalDamageDealtToChampions": 11000, "totalDamageTaken": 19000,
+        "totalHeal": 3800, "visionScore": 9, "doubleKills": 0, "tripleKills": 0, "quadraKills": 0, "pentaKills": 0, "largestMultiKill": 1,
+        "firstBloodKill": false, "firstBloodAssist": false, "firstTowerKill": false, "firstTowerAssist": false,
+        "gameEndedInSurrender": false, "gameEndedInEarlySurrender": false }
+    }
+  ]
+}

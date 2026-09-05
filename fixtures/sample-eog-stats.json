@@ -1,0 +1,8 @@
+{
+  "players": [
+    { "puuid": "puuid-bob", "totalHeal": 2000, "totalHealsOnTeammates": 4200, "totalDamageShieldedOnTeammates": 1800, "totalUnitsHealed": 5, "wasAfk": false, "leaver": false },
+    { "puuid": "puuid-erin", "totalHeal": 500, "totalHealsOnTeammates": 3100, "totalDamageShieldedOnTeammates": 900, "totalUnitsHealed": 5, "wasAfk": false, "leaver": false },
+    { "puuid": "puuid-ivan", "totalHeal": 100, "totalHealsOnTeammates": 0, "totalDamageShieldedOnTeammates": 0, "totalUnitsHealed": 0, "wasAfk": true, "leaver": true },
+    { "puuid": "puuid-judy", "totalHeal": 3800, "totalHealsOnTeammates": 1200, "totalDamageShieldedOnTeammates": 0, "totalUnitsHealed": 3, "wasAfk": false, "leaver": false }
+  ]
+}
